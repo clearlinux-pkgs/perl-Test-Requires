@@ -4,13 +4,14 @@
 #
 Name     : perl-Test-Requires
 Version  : 0.10
-Release  : 17
+Release  : 18
 URL      : http://search.cpan.org/CPAN/authors/id/T/TO/TOKUHIROM/Test-Requires-0.10.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/T/TO/TOKUHIROM/Test-Requires-0.10.tar.gz
 Summary  : 'Checks to see if the module can be loaded'
 Group    : Development/Tools
-License  : Artistic-1.0-Perl GPL-1.0
-Requires: perl-Test-Requires-doc
+License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
+Requires: perl-Test-Requires-license = %{version}-%{release}
+BuildRequires : buildreq-cpan
 
 %description
 # NAME
@@ -20,12 +21,21 @@ Test::Requires - Checks to see if the module can be loaded
 use inc::Module::Install;
 test_requires 'Test::Requires';
 
-%package doc
-Summary: doc components for the perl-Test-Requires package.
-Group: Documentation
+%package dev
+Summary: dev components for the perl-Test-Requires package.
+Group: Development
+Provides: perl-Test-Requires-devel = %{version}-%{release}
 
-%description doc
-doc components for the perl-Test-Requires package.
+%description dev
+dev components for the perl-Test-Requires package.
+
+
+%package license
+Summary: license components for the perl-Test-Requires package.
+Group: Default
+
+%description license
+license components for the perl-Test-Requires package.
 
 
 %prep
@@ -38,7 +48,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 else
 %{__perl} Build.PL
 ./Build
@@ -53,10 +63,12 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-Test-Requires
+cp LICENSE %{buildroot}/usr/share/package-licenses/perl-Test-Requires/LICENSE
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -65,8 +77,12 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/Test/Requires.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Test/Requires.pm
 
-%files doc
+%files dev
 %defattr(-,root,root,-)
-%doc /usr/share/man/man3/*
+/usr/share/man/man3/Test::Requires.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-Test-Requires/LICENSE
