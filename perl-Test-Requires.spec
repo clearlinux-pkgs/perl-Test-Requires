@@ -4,7 +4,7 @@
 #
 Name     : perl-Test-Requires
 Version  : 0.10
-Release  : 21
+Release  : 22
 URL      : http://search.cpan.org/CPAN/authors/id/T/TO/TOKUHIROM/Test-Requires-0.10.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/T/TO/TOKUHIROM/Test-Requires-0.10.tar.gz
 Summary  : 'Checks to see if the module can be loaded'
