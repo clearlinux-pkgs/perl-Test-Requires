@@ -4,10 +4,10 @@
 #
 Name     : perl-Test-Requires
 Version  : 0.10
-Release  : 26
+Release  : 27
 URL      : http://search.cpan.org/CPAN/authors/id/T/TO/TOKUHIROM/Test-Requires-0.10.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/T/TO/TOKUHIROM/Test-Requires-0.10.tar.gz
-Summary  : 'Checks to see if the module can be loaded'
+Summary  : Checks to see if the module can be loaded
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Test-Requires-license = %{version}-%{release}
@@ -25,6 +25,7 @@ test_requires 'Test::Requires';
 Summary: dev components for the perl-Test-Requires package.
 Group: Development
 Provides: perl-Test-Requires-devel = %{version}-%{release}
+Requires: perl-Test-Requires = %{version}-%{release}
 
 %description dev
 dev components for the perl-Test-Requires package.
