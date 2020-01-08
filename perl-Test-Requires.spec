@@ -4,13 +4,14 @@
 #
 Name     : perl-Test-Requires
 Version  : 0.10
-Release  : 31
+Release  : 32
 URL      : http://search.cpan.org/CPAN/authors/id/T/TO/TOKUHIROM/Test-Requires-0.10.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/T/TO/TOKUHIROM/Test-Requires-0.10.tar.gz
-Summary  : Checks to see if the module can be loaded
+Summary  : 'Checks to see if the module can be loaded'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Test-Requires-license = %{version}-%{release}
+Requires: perl-Test-Requires-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 
 %description
@@ -39,14 +40,24 @@ Group: Default
 license components for the perl-Test-Requires package.
 
 
+%package perl
+Summary: perl components for the perl-Test-Requires package.
+Group: Default
+Requires: perl-Test-Requires = %{version}-%{release}
+
+%description perl
+perl components for the perl-Test-Requires package.
+
+
 %prep
 %setup -q -n Test-Requires-0.10
+cd %{_builddir}/Test-Requires-0.10
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -56,7 +67,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -65,7 +76,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Test-Requires
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-Test-Requires/LICENSE
+cp %{_builddir}/Test-Requires-0.10/LICENSE %{buildroot}/usr/share/package-licenses/perl-Test-Requires/d9e84b650b08395d1258f8c1535877bcf57c790e
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -78,7 +89,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Test/Requires.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -86,4 +96,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-Test-Requires/LICENSE
+/usr/share/package-licenses/perl-Test-Requires/d9e84b650b08395d1258f8c1535877bcf57c790e
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/Test/Requires.pm
