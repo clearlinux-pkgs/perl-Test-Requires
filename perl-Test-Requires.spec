@@ -4,7 +4,7 @@
 #
 Name     : perl-Test-Requires
 Version  : 0.10
-Release  : 32
+Release  : 33
 URL      : http://search.cpan.org/CPAN/authors/id/T/TO/TOKUHIROM/Test-Requires-0.10.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/T/TO/TOKUHIROM/Test-Requires-0.10.tar.gz
 Summary  : 'Checks to see if the module can be loaded'
@@ -100,4 +100,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/Test/Requires.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Test/Requires.pm
