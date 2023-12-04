@@ -5,7 +5,7 @@
 #
 Name     : perl-Test-Requires
 Version  : 0.11
-Release  : 46
+Release  : 47
 URL      : https://cpan.metacpan.org/authors/id/T/TO/TOKUHIROM/Test-Requires-0.11.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/T/TO/TOKUHIROM/Test-Requires-0.11.tar.gz
 Summary  : 'Checks to see if the module can be loaded'
